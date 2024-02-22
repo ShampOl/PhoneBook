@@ -43,13 +43,12 @@ def change_data():
         name_data_d = input('Введите имя контакта, который Вы хотите изменить: ')
         
         contact_found = False
-        replace_index = 0  # Индекс, с которого начнем замену данных в первом варианте
+        replace_index = 0  
 
         for i in range(len(data_list)):
             if name_data_d in data_list[i]:
                 new_contact_data = input_data()
                 contact_found = True
-                # Запоминаем индекс, чтобы начать замену данных с этого места в первом варианте
                 replace_index = i
                 break
 
@@ -60,15 +59,11 @@ def change_data():
                 print('Выход из программы.')
                 return
         else:
-            # Если меняем данные в первом файле, заменяем только 4 строки
             if data_file == DATA_FILE_FIRST:
                 with open(data_file, 'w', encoding='utf-8') as f:
-                    # Заменяем существующие строки новыми данными
                     f.writelines(data_list[:replace_index] + [new_contact_data] + data_list[replace_index + 5:])
-            # Если меняем данные во втором файле, заменяем только одну строку
             elif data_file == DATA_FILE_SECOND:
                 with open(data_file, 'w', encoding='utf-8') as f:
-                    # Заменяем существующую строку новыми данными
                     f.writelines(data_list[:replace_index] + [new_contact_data] + data_list[replace_index + 2:])
             break
 
